@@ -32,7 +32,14 @@ Upload Image Page)
 ```
 
 
-# 
+# TODO
+it's so wrong 
+
+```
+ move LoginPage
+ login checked 
+ move Image List Page
+```
 
 
 
