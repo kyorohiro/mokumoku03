@@ -46,10 +46,27 @@ it's so wrong
 
 
 
-REF
+
+
+# REF
 
 https://dev.to/kyorohiro/dart-x-flutter-mokumoku-live-coding-19-09-2020-iec
 
 
-# Document how to get current Route
+Document how to get current Route
 https://github.com/flutter/flutter/issues/14243
+
+
+What is best practices for implement a infinite scroll GridView in flutter?
+https://stackoverflow.com/questions/61707587/what-is-best-practices-for-implement-a-infinite-scroll-gridview-in-flutter
+
+
+https://www.woolha.com/tutorials/flutter-using-boxdecoration-examples
+
+
+Flutter GridView footer (for indicating load with infinite scrolling)
+https://stackoverflow.com/questions/47001380/flutter-gridview-footer-for-indicating-load-with-infinite-scrolling
+
+
+https://blog.chocolapod.net/momokan/entry/105
+

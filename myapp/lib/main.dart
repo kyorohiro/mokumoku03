@@ -14,6 +14,7 @@ void main() {
         "/home": (context) => MyHome(),
       },
       home: LoginPage()
+
     )
   );
 }
@@ -22,9 +23,40 @@ void main() {
 class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Hello, World!!"),
+    var gen = (int i) {
+      return Container(
+        child: Center(child: Text("${i}")),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black45,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        
+        ),
+      );
+    };
+    var grid =  GridView.count(
+      crossAxisCount: 3,
+      children: List<int>.generate(100, (index) => index).map((e) => gen(e)).toList()
     );
+    return Scaffold(
+      appBar: AppBar(title: Text("Home"),),
+      body: Container(
+        margin: EdgeInsets.all(33),
+        child:grid,),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add_a_photo),
+        onPressed: (){
+          print("pressed photo button");
+        }),
+      
+      
+      );
+    
+ 
+////    return Container(
+////      child: Text("Hello, World!!"),
+////    );
   }
 }
 
