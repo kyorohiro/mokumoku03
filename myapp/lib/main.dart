@@ -3,7 +3,6 @@ import 'package:myapp/reigstpage.dart';
 import './login.dart';
 import './loginpage.dart';
 
-var LABEL_LOGIN_PAGE = "Login Page";
 
 void main() {
   setupFirebase();
@@ -12,17 +11,19 @@ void main() {
       routes: <String, WidgetBuilder>{
         "/login": (context) => LoginPage(),
         "/regist":(context) => RegistPage(),
+        "/home": (context) => MyHome(),
       },
       home: LoginPage()
     )
   );
 }
 
-class LoginPage_ extends StatelessWidget {
+
+class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Hello"),
+      child: Text("Hello, World!!"),
     );
   }
 }

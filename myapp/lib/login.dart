@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:firebase/firebase.dart' as fb;
 
         
@@ -8,6 +10,11 @@ fb.App gfirebaseApp;
 typedef OnSignedIn = void Function();
 typedef OnNoSignedIn = void Function();
 
+
+StreamController<Null> _logined = StreamController<Null>.broadcast();
+Stream<Null> logined(){
+  return _logined.stream;
+}
 
 //
 // Firebase
@@ -24,9 +31,10 @@ setupFirebase({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
     gfirebaseApp.auth().onAuthStateChanged.listen((user) {
       print("user:${user}");
       if(user != null) {
-        onSignedIn();
+        if(onSignedIn != null){onSignedIn();}
+        _logined.add(null);
       }else {
-        onNoSignedIn();
+        if(onNoSignedIn != null){onNoSignedIn();}
       }
     });
   } catch(e) {

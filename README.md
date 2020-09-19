@@ -42,3 +42,7 @@ Upload Image Page)
 REF
 
 https://dev.to/kyorohiro/dart-x-flutter-mokumoku-live-coding-19-09-2020-iec
+
+
+# Document how to get current Route
+https://github.com/flutter/flutter/issues/14243
