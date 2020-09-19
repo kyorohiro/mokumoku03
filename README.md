@@ -1,3 +1,35 @@
+Image Uploader with Firebase
+
+
+[Page]
+
+- Login Page
+- Image List Page
+- Image Upload Page
+
+```
+START)
+  if Logined status 
+     --> Yout Image Lst Page
+  else
+     --> Login Page
+
+Login Page) 
+If Success Login
+     -->  Image List Page
+
+
+Image List Page)
+   if click add button 
+     --> Image Upload Pge
+
+Upload Image Page)
+ 
+   
+```
+
+
+# 
 
 
 
