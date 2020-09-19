@@ -3,6 +3,7 @@ Image Uploader with Firebase
 
 [Page]
 
+- Create User Page
 - Login Page
 - Image List Page
 - Image Upload Page
@@ -18,6 +19,8 @@ Login Page)
 If Success Login
      -->  Image List Page
 
+If click Regist Page Btn
+    --> Regist Page
 
 Image List Page)
    if click add button 
