@@ -55,10 +55,10 @@ class RegistPage extends StatelessWidget {
                     ),
                   onTap: (){
                     print("regist page btn");
+                    Navigator.pop(context);
                   },
                 )
             )
-           
         ],
       );
     };

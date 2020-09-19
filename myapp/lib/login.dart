@@ -28,7 +28,8 @@ loginAtFirebase(String email, String password) async {
   try {
     print("fn slog");
     var userCredential = await fb.auth().signInWithEmailAndPassword(email, password);
-    print(userCredential.additionalUserInfo.username);
+    print("xx:${userCredential.user.email}");
+    print("xx:${userCredential.additionalUserInfo.username}");
   } catch(e) {
     print("fb error ${e}");
     throw LoginErrorMessage()..message="${e}";
@@ -42,7 +43,8 @@ registAtFirebase(String email, String password) async {
     print("fn slog");
     var userCredential = await fb.auth().createUserWithEmailAndPassword(email, password);
     //signInWithEmailAndPassword(email, password);
-    print(userCredential.additionalUserInfo.username);
+    print("xx:${userCredential.additionalUserInfo}");
+    print("xx:${userCredential.additionalUserInfo.username}");
   } catch(e) {
     print("fb error ${e}");
     throw LoginErrorMessage()..message="${e}";
