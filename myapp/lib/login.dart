@@ -5,10 +5,14 @@ import 'package:firebase/firebase.dart' as fb;
 fb.App gfirebaseApp;
 
 
+typedef OnSignedIn = void Function();
+typedef OnNoSignedIn = void Function();
+
+
 //
 // Firebase
 //
-setupFirebase() {
+setupFirebase({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
   try {
     print("fb init");
     gfirebaseApp = fb.initializeApp(
@@ -17,6 +21,14 @@ setupFirebase() {
       projectId: "mokumoku00003",
       appId: "1:1011491025362:web:bbee4b2beb78920450980b"
     );
+    gfirebaseApp.auth().onAuthStateChanged.listen((user) {
+      print("user:${user}");
+      if(user != null) {
+        onSignedIn();
+      }else {
+        onNoSignedIn();
+      }
+    });
   } catch(e) {
     print("fb error ${e}");
   } finally {
