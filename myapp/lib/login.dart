@@ -76,14 +76,10 @@ registAtFirebase(String email, String password) async {
   }
 }
 
-putData() async {
+putData(Map<String,dynamic> value) async {
   try {
     // maybe wrong
-    var docRef = await fb.firestore().collection(fb.auth().currentUser.uid).doc("tests").collection("xx").add({
-      "first": "Ada",
-      "last": "Lovelace",
-      "born": 1815
-    });
+    var docRef = await fb.firestore().collection("users/${fb.auth().currentUser.uid}/images").add(value);
     print("Document written with ID: ${docRef.id}");
   } catch(e) {
     print(e);
@@ -92,17 +88,18 @@ putData() async {
 }
 
 // path **/**/xx.png  is ok, /**/**.png is ng
-uploadBuffer(Uint8List buffer, {String path}) async {
-  uploadBlob(buffer, path:path);
+Future<String> uploadBuffer(Uint8List buffer, {String path}) async {
+  return uploadBlob(buffer, path:path);
 }
 
-uploadBlob(dynamic blob, {String path}) async {
+Future<String> uploadBlob(dynamic blob, {String path}) async {
   if(path == null) {
     path = uuid.Uuid.createV1() +"_"+ uuid.Uuid.createUUID();
   }
   var storageRef = fb.storage().ref("users/"+fb.auth().currentUser.uid);
   var testRef = storageRef.child("images/"+path);        
   testRef.put(blob); 
+  return path;
 }
 
 class LoginErrorMessage {

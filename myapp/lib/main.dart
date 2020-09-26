@@ -14,7 +14,7 @@ import 'dart:html' as html;
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    match /{uid}/{allPaths=**} {
+    match /users/{uid}/{allPaths=**} {
       allow read, write: if request.auth.uid == uid;
     }
   }
@@ -80,12 +80,14 @@ class MyHome extends StatelessWidget {
         child: Icon(Icons.add_a_photo),
         onPressed: () async {
           print("pressed photo button");
-          //putData();
-          
+        
           var filedata = await fi.FileInputBuilderWeb().create().getFiles();
           if(filedata != null && filedata.length > 0) {
             var binary = await filedata.first.getBinaryData();
-            uploadBuffer(binary);      
+            var uuid = await uploadBuffer(binary);
+            putData({
+              "name": uuid
+            });
             print("selected a file 6");            
           } else {
             print("no not select a file");
