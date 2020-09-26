@@ -51,13 +51,24 @@ void main() {
   );
 }
 
- 
+// String := image url
+class MyDynamicGridViewClient extends  dyna.DynamicGridViewClient<String> {
+    int i=0;
+  Future<List<String>> getData() async {
+    var files = await listFiles();
+    return  files;
+  }
+  Widget createWidget(String v) {
+    return Container(child: MyImageWidget(v),);
+  }
+}
+
 class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          child: dyna.DynamicGridView(dyna.SampleDynamicGridViewClient(),2),
+          child: dyna.DynamicGridView(MyDynamicGridViewClient(),2),
       ),
       appBar: AppBar(title: Text("Home"),),
       //
@@ -129,7 +140,7 @@ class MyHome extends StatelessWidget {
       );
   }
 }
-
+*/
 class MyImageWidget extends StatefulWidget {
   String uuid;
   MyImageWidget(this.uuid);
@@ -157,7 +168,7 @@ class _MyImageWidgetState extends State<MyImageWidget> {
     
   }
 }
-*/
+
 
 
 ////
