@@ -67,6 +67,7 @@ class MyHome extends StatelessWidget {
         ),
       );
     };
+
     var grid =  GridView.count(
       crossAxisCount: 3,
       children: List<int>.generate(100, (index) => index).map((e) => gen(e)).toList()
@@ -75,24 +76,29 @@ class MyHome extends StatelessWidget {
       appBar: AppBar(title: Text("Home"),),
       body: Container(
         margin: EdgeInsets.all(33),
-        child:grid,),
+        child: FutureBuilder<List<String>>(
+          future: listFiles(),
+          builder: (context, snapshot) {
+          if(snapshot.hasData) {
+            return GridView.count(
+              crossAxisCount: 3,
+              children: snapshot.data.map((e) => Container(child: Text('${e}'),)).toList(),
+            );       
+          }else {
+
+          }
+       },)),
+      //
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_a_photo),
         onPressed: () async {
-          print("pressed photo button");
-   
+          // file upload   
           var filedata = await fi.FileInputBuilderWeb().create().getFiles();
           if(filedata != null && filedata.length > 0) {
             var binary = await filedata.first.getBinaryData();
             uploadBuffer(binary);
-            print("selected a file 6"); 
-            print("${await listFiles()}");       
-          } else {
-            print("no not select a file");
           }
-        }),
-      
-      
+        }),      
       );
   }
 }

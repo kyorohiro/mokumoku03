@@ -90,6 +90,7 @@ Future<List<String>> listFiles() async {
      print(d.id);
    }
    print(x.size);
+   return x.docs.map((e) => e.id).toList();
 }
 
 // path **/**/xx.png  is ok, /**/**.png is ng
