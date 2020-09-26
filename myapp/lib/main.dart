@@ -66,10 +66,6 @@ class MyHome extends StatelessWidget {
       );
     };
 
-    var grid =  GridView.count(
-      crossAxisCount: 3,
-      children: List<int>.generate(100, (index) => index).map((e) => gen(e)).toList()
-    );
     return Scaffold(
       appBar: AppBar(title: Text("Home"),),
       body: Container(
