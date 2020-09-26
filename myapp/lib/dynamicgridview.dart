@@ -40,17 +40,21 @@ class _DynamicGridViewState extends State<DynamicGridView> {
       if(controller.position.pixels == controller.position.maxScrollExtent) {
         // add item?        
         print("=====================");
-        contents.addAll(await widget.client.getData());
+        var dat = await widget.client.getData();
+        print("== ${dat.length}");
+        contents.addAll(dat);
         setState(() {
           
         });
       }
     });
+    // todo :this future build paet is wront
     return FutureBuilder(
       future: this.widget.client.getData(),
       builder: (context, snapshot) {
-        print("-------- ${contents.length}");
+        
         if(snapshot.hasData) {
+          print("---ONEONE----- ${contents.length}");
           contents.addAll(snapshot.data);
           return GridView.count(
             children: contents.map((e) => widget.client.createWidget(e)).toList(),
