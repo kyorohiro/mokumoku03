@@ -28,7 +28,8 @@ setupFirebase({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
       authDomain: "mokumoku00003.firebaseapp.com",
       projectId: "mokumoku00003",
       storageBucket: "mokumoku00003.appspot.com",
-      appId: "1:1011491025362:web:bbee4b2beb78920450980b"
+      appId: "1:1011491025362:web:bbee4b2beb78920450980b",
+      databaseURL: "https://mokumoku00003.firebaseio.com"
     );
     gfirebaseApp.auth().onAuthStateChanged.listen((user) {
       print("user:${user}");
@@ -75,6 +76,21 @@ registAtFirebase(String email, String password) async {
   }
 }
 
+putData() async {
+  try {
+    // maybe wrong
+    var docRef = await fb.firestore().collection(fb.auth().currentUser.uid).doc("tests").collection("xx").add({
+      "first": "Ada",
+      "last": "Lovelace",
+      "born": 1815
+    });
+    print("Document written with ID: ${docRef.id}");
+  } catch(e) {
+    print(e);
+  }
+
+}
+
 // path **/**/xx.png  is ok, /**/**.png is ng
 uploadBuffer(Uint8List buffer, {String path}) async {
   uploadBlob(buffer, path:path);
@@ -84,8 +100,8 @@ uploadBlob(dynamic blob, {String path}) async {
   if(path == null) {
     path = uuid.Uuid.createV1() +"_"+ uuid.Uuid.createUUID();
   }
-  var storageRef = fb.storage().ref(fb.auth().currentUser.uid);
-  var testRef = storageRef.child(path);        
+  var storageRef = fb.storage().ref("users/"+fb.auth().currentUser.uid);
+  var testRef = storageRef.child("images/"+path);        
   testRef.put(blob); 
 }
 

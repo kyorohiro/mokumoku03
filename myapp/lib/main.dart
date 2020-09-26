@@ -15,19 +15,24 @@ rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
     match /{uid}/{allPaths=**} {
-      allow read, write: if request.auth != null;
+      allow read, write: if request.auth.uid == uid;
     }
   }
 }
+
+
 # Firebase Store Rule
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
+    match /{uid}/{document=**} {
       allow read, write: if request.auth != null;
     }
   }
 }
+
+[ref]
+https://medium.com/@khreniak/cloud-firestore-security-rules-basics-fac6b6bea18e
 */
 
 
@@ -46,16 +51,6 @@ void main() {
   );
 }
 
-xx() async {
-  fb.StorageReference ref = fb.storage().ref('pkg_firebase/examples/storage');
-  var file = html.Blob(["Hello,World!!"]);
-  var uploadTask = ref.child("test2.txt").put(file);
-  try {
-    await uploadTask.future;
-  } catch(e) {
-    print(e);
-  }
-}
 
 class MyHome extends StatelessWidget {
   @override
@@ -85,6 +80,8 @@ class MyHome extends StatelessWidget {
         child: Icon(Icons.add_a_photo),
         onPressed: () async {
           print("pressed photo button");
+          //putData();
+          
           var filedata = await fi.FileInputBuilderWeb().create().getFiles();
           if(filedata != null && filedata.length > 0) {
             var binary = await filedata.first.getBinaryData();
