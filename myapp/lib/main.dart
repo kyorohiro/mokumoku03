@@ -63,7 +63,14 @@ class MyDynamicGridViewClient extends  dyna.DynamicGridViewClient<String> {
     return  result.data;
   }
   Widget createWidget(String v) {
-    return Container(child: MyImageWidget(v),);
+    return  Container(
+            //color: Colors.black38,
+            decoration: BoxDecoration(
+              borderRadius:BorderRadius.circular(10.0) ,
+              border: Border.all(color:Colors.grey,width: 2)),
+            child: MyImageWidget(v)//Text('${e}'),
+          );
+    //return Container(child: MyImageWidget(v),);
   }
 }
 
