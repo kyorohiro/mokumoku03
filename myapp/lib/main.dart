@@ -78,14 +78,8 @@ class MyHome extends StatelessWidget {
           print("pressed photo button");
           var filedata = await fi.FileInputBuilderWeb().create().getFiles();
           if(filedata != null && filedata.length > 0) {
-            print("selected a file 00");            
-            var storageRef = fb.storage().ref("MmPcQoCv7ZgH0oSCDYjWxuiy4kw2");
-            print("selected a file 3");            
-            var testRef = storageRef.child("xx.png");
-            print("selected a file 4"); 
             var binary = await filedata.first.getBinaryData();
-            print("selected a file 5");            
-            testRef.put(binary);            
+            uploadBuffer(binary);      
             print("selected a file 6");            
           } else {
             print("no not select a file");

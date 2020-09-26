@@ -1,8 +1,9 @@
 
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:firebase/firebase.dart' as fb;
-
+import './uuid.dart' as uuid;
         
 fb.App gfirebaseApp;
 
@@ -74,6 +75,21 @@ registAtFirebase(String email, String password) async {
   }
 }
 
+// path **/**/xx.png  is ok, /**/**.png is ng
+uploadBuffer(Uint8List buffer, {String path}) async {
+  uploadBlob(buffer, path:path);
+}
+
+uploadBlob(dynamic blob, {String path}) async {
+  if(path == null) {
+    path = uuid.Uuid.createUUID();
+  }
+  var storageRef = fb.storage().ref(fb.auth().currentUser.uid);
+  var testRef = storageRef.child(path);        
+  testRef.put(blob); 
+}
+
 class LoginErrorMessage {
   String message;
 }
+
