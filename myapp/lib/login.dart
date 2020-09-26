@@ -130,14 +130,14 @@ Future<String> uploadBlobToStorage(dynamic blob, {String name=null}) async {
     name = createUUID();
   }
   var storageRef = fb.storage().ref("users/"+fb.auth().currentUser.uid);
-  var testRef = storageRef.child("images/"+name);        
+  var testRef = storageRef.child("files/"+name);        
   testRef.put(blob); 
   return name;
 }
 
 Future<Uri> getUrl(String name) async  {
   var storageRef = fb.storage().ref("users/"+fb.auth().currentUser.uid);
-  var testRef = storageRef.child("images/"+name);
+  var testRef = storageRef.child("files/"+name);
   try {
     print("getDownload");
     var uri = await testRef.getDownloadURL();
