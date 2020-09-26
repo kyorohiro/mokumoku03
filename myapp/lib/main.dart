@@ -57,7 +57,7 @@ class MyDynamicGridViewClient extends  dyna.DynamicGridViewClient<String> {
   Object lastKey;
   Future<List<String>> getData() async {
     //
-    // TODO to implements about listFiles's lastkey  
+    // TODO to reimplements about listFiles's lastkey  
     var result = await listFiles(lastKey:lastKey);
     lastKey = result.lastkey;
     return  result.data;
@@ -72,7 +72,7 @@ class MyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          child: dyna.DynamicGridView(MyDynamicGridViewClient(),2),
+          child: dyna.DynamicGridView(MyDynamicGridViewClient(),3),
       ),
       appBar: AppBar(title: Text("Home"),),
       //

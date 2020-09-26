@@ -92,7 +92,7 @@ class ListFilesResult {
 
 //Future<List<String>> 
 Future<ListFilesResult> listFiles({Object lastKey}) async {
-   var collectionRef = fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").orderBy("name").limit(5);
+   var collectionRef = fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").orderBy("name");//.limit(5);
      print("lasyKey = ${lastKey}");
      //  [memo]
      //  ok : fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").orderBy("name").limit(5); 
