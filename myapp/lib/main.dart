@@ -85,7 +85,8 @@ class MyHome extends StatelessWidget {
           if(filedata != null && filedata.length > 0) {
             var binary = await filedata.first.getBinaryData();
             uploadBuffer(binary);
-            print("selected a file 6");            
+            print("selected a file 6"); 
+            print("${await listFiles()}");       
           } else {
             print("no not select a file");
           }

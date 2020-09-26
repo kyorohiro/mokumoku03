@@ -83,6 +83,12 @@ String createUUID() {
   return uuid.Uuid.createV1() +"_"+ uuid.Uuid.createUUID();
 }
 
+Future<List<String>> listFiles() async {
+   var collectionRef = fb.firestore().collection("users/${fb.auth().currentUser.uid}/files");
+   var x = await collectionRef.get();
+   print(x.size);
+}
+
 // path **/**/xx.png  is ok, /**/**.png is ng
 Future<String> uploadBuffer(Uint8List buffer, {String contentType="application/octet-stream"}) async {
   String id = createUUID();
