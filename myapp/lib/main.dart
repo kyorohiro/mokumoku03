@@ -44,13 +44,37 @@ void main() {
         "/regist":(context) => RegistPage(),
         "/home": (context) => MyHome(),
       },
-      home: LoginPage()
+      home: LoginPage(),
+ 
 
     )
   );
 }
 
-
+ 
+class MyHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+          child: dyna.DynamicGridView(dyna.SampleDynamicGridViewClient(),2),
+      ),
+      appBar: AppBar(title: Text("Home"),),
+      //
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add_a_photo),
+        onPressed: () async {
+          // file upload   
+          var filedata = await fi.FileInputBuilderWeb().create().getFiles();
+          if(filedata != null && filedata.length > 0) {
+            var binary = await filedata.first.getBinaryData();
+            uploadBuffer(binary);
+          }
+        }),    
+      );
+  }
+}
+/*
 class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -133,7 +157,7 @@ class _MyImageWidgetState extends State<MyImageWidget> {
     
   }
 }
-
+*/
 
 
 ////

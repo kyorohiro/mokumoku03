@@ -10,11 +10,22 @@ abstract class DynamicGridViewClient<X> {
   Widget createWidget(X v);
 }
 
+class SampleDynamicGridViewClient extends  DynamicGridViewClient<String> {
+    int i=0;
+  Future<List<String>> getData() async {
+    return List<String>.generate(100, (index) => "ZZ:${i++}");
+  }
+  Widget createWidget(String v) {
+    return Container(child: Text(v),);
+  }
+}
+
 //DynamicGridViewClient client = new  DynamicGridViewClient();
 
 class DynamicGridView extends StatefulWidget {
   DynamicGridViewClient client;
-  DynamicGridView(this.client);
+  int crossAxisCount;
+  DynamicGridView(this.client, this.crossAxisCount);
   @override
   _DynamicGridViewState createState() => _DynamicGridViewState();
 }
@@ -43,7 +54,7 @@ class _DynamicGridViewState extends State<DynamicGridView> {
           contents.addAll(snapshot.data);
           return GridView.count(
             children: contents.map((e) => widget.client.createWidget(e)).toList(),
-            crossAxisCount: 3,
+            crossAxisCount: this.widget.crossAxisCount,
             controller: controller,
             );
         }else {
