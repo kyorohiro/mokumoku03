@@ -26,6 +26,7 @@ setupFirebase({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
       apiKey: "AIzaSyBiMJJy4UT5wXDmuGAuIpH3LDf9xfJN-KM ",
       authDomain: "mokumoku00003.firebaseapp.com",
       projectId: "mokumoku00003",
+      storageBucket: "mokumoku00003.appspot.com",
       appId: "1:1011491025362:web:bbee4b2beb78920450980b"
     );
     gfirebaseApp.auth().onAuthStateChanged.listen((user) {
