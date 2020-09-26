@@ -80,14 +80,11 @@ class MyHome extends StatelessWidget {
         child: Icon(Icons.add_a_photo),
         onPressed: () async {
           print("pressed photo button");
-        
+   
           var filedata = await fi.FileInputBuilderWeb().create().getFiles();
           if(filedata != null && filedata.length > 0) {
             var binary = await filedata.first.getBinaryData();
-            var uuid = await uploadBuffer(binary);
-            putData({
-              "name": uuid
-            });
+            uploadBuffer(binary);
             print("selected a file 6");            
           } else {
             print("no not select a file");

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:firebase/firebase.dart' as fb;
+import 'package:uuid/uuid.dart';
 import './uuid.dart' as uuid;
 
 fb.App gfirebaseApp;
@@ -76,30 +77,50 @@ registAtFirebase(String email, String password) async {
   }
 }
 
-putData(Map<String,dynamic> value) async {
+
+
+String createUUID() {
+  return uuid.Uuid.createV1() +"_"+ uuid.Uuid.createUUID();
+}
+
+// path **/**/xx.png  is ok, /**/**.png is ng
+Future<String> uploadBuffer(Uint8List buffer, {String contentType="application/octet-stream"}) async {
+  String id = createUUID();
+  // todo guard
+  uploadBufferToStorage(buffer,name: id);
+  addFileInfoToDB(id,contentType:contentType);
+  return id;
+}
+
+
+
+addFileInfoToDB(String name, {String contentType="application/octet-stream"}) async {
   try {
     // maybe wrong
-    var docRef = await fb.firestore().collection("users/${fb.auth().currentUser.uid}/images").add(value);
+    var docRef = await fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").add({
+      "v":1,
+      "name":name,
+      "contentType":contentType
+    });
     print("Document written with ID: ${docRef.id}");
   } catch(e) {
     print(e);
   }
-
 }
 
 // path **/**/xx.png  is ok, /**/**.png is ng
-Future<String> uploadBuffer(Uint8List buffer, {String path}) async {
-  return uploadBlob(buffer, path:path);
+Future<String> uploadBufferToStorage(Uint8List buffer, {String name=null}) async {
+  return uploadBlobToStorage(buffer,name:Uuid.NAMESPACE_NIL);
 }
 
-Future<String> uploadBlob(dynamic blob, {String path}) async {
-  if(path == null) {
-    path = uuid.Uuid.createV1() +"_"+ uuid.Uuid.createUUID();
+Future<String> uploadBlobToStorage(dynamic blob, {String name=null}) async {
+  if(name == null) {
+    name = createUUID();
   }
   var storageRef = fb.storage().ref("users/"+fb.auth().currentUser.uid);
-  var testRef = storageRef.child("images/"+path);        
+  var testRef = storageRef.child("images/"+name);        
   testRef.put(blob); 
-  return path;
+  return name;
 }
 
 class LoginErrorMessage {
