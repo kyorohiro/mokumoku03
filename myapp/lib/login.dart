@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:uuid/uuid.dart';
 import './uuid.dart' as uuid;
+import 'dart:html' as html;
 
 fb.App gfirebaseApp;
 
@@ -121,7 +122,7 @@ addFileInfoToDB(String name, {String contentType="application/octet-stream"}) as
 
 // path **/**/xx.png  is ok, /**/**.png is ng
 Future<String> uploadBufferToStorage(Uint8List buffer, {String name=null}) async {
-  return uploadBlobToStorage(buffer,name:Uuid.NAMESPACE_NIL);
+  return uploadBlobToStorage(buffer,name:name);
 }
 
 Future<String> uploadBlobToStorage(dynamic blob, {String name=null}) async {
@@ -132,6 +133,36 @@ Future<String> uploadBlobToStorage(dynamic blob, {String name=null}) async {
   var testRef = storageRef.child("images/"+name);        
   testRef.put(blob); 
   return name;
+}
+
+Future<Uri> getUrl(String name) async  {
+  var storageRef = fb.storage().ref("users/"+fb.auth().currentUser.uid);
+  var testRef = storageRef.child("images/"+name);
+  try {
+    print("getDownload");
+    var uri = await testRef.getDownloadURL();
+    /*Future((){
+      print("ZZ-------- ${uri.toString()}");
+      var req = html.HttpRequest();
+      req.onLoad.listen((event) {
+        print("onLoad S");
+        var blob = req.response;
+        print("${blob}");        
+        print("onLoad E");
+      });
+      req.onError.listen((event) {
+        print("error");
+        print(event);
+      });
+      req.open("GET", uri.toString());
+      req.send();
+    });*/
+    return  uri;
+  } catch(e) {
+    print("error");
+    print("${e}");
+    rethrow;
+  }
 }
 
 class LoginErrorMessage {

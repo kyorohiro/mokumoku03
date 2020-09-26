@@ -88,7 +88,7 @@ class MyHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius:BorderRadius.circular(10.0) ,
                     border: Border.all(color:Colors.grey,width: 2)),
-                  child: Text('${e}'),
+                  child: MyImageWidget(e)//Text('${e}'),
                 );
               }).toList());
                  
@@ -122,9 +122,20 @@ class MyImageWidget extends StatefulWidget {
 class _MyImageWidgetState extends State<MyImageWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    getUrl(widget.uuid);
+    //return Container(child: Text("xx"),);
+    
+    return FutureBuilder(
+      future: getUrl(widget.uuid),
+      builder: (context, snapshot) {
+        if(snapshot.hasData) {
+          Uri d  = snapshot.data;
+          return Image.network(d.toString());
+        } else {
+          return  Container(child: Text("Loading.."),);
+        }
+      });
+    
   }
 }
 
