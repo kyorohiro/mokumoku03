@@ -1,26 +1,4 @@
 import 'package:flutter/material.dart';
-// https://stackoverflow.com/questions/51069712/how-to-know-if-a-widget-is-visible-within-a-viewport
-
-main( ) {
-  runApp(
-    MaterialApp(
-      home:  Scaffold(
-        appBar: AppBar(title: Text("Sample"),),
-        body: DynamiCGridView(MyDynamicGridViewClient())
-      )
-    )
-  );
-}
-
-class MyDynamicGridViewClient extends  DynamicGridViewClient<String> {
-    int i=0;
-  Future<List<String>> getData() async {
-    return List<String>.generate(100, (index) => "ZZ:${i++}");
-  }
-  Widget createWidget(String v) {
-    return Container(child: Text(v),);
-  }
-}
 
 //
 // TODO 
@@ -34,14 +12,14 @@ abstract class DynamicGridViewClient<X> {
 
 //DynamicGridViewClient client = new  DynamicGridViewClient();
 
-class DynamiCGridView extends StatefulWidget {
+class DynamicGridView extends StatefulWidget {
   DynamicGridViewClient client;
-  DynamiCGridView(this.client);
+  DynamicGridView(this.client);
   @override
-  _DynamiCGridViewState createState() => _DynamiCGridViewState();
+  _DynamicGridViewState createState() => _DynamicGridViewState();
 }
 
-class _DynamiCGridViewState extends State<DynamiCGridView> {
+class _DynamicGridViewState extends State<DynamicGridView> {
   List contents = [];
   @override
   Widget build(BuildContext context) {
