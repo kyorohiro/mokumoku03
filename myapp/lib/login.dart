@@ -97,7 +97,8 @@ Future<String> uploadBuffer(Uint8List buffer, {String contentType="application/o
 addFileInfoToDB(String name, {String contentType="application/octet-stream"}) async {
   try {
     // maybe wrong
-    var docRef = await fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").add({
+    var docRef = await fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").doc(name)
+    .set({
       "v":1,
       "name":name,
       "contentType":contentType
