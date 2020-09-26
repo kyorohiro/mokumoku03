@@ -111,6 +111,23 @@ class MyHome extends StatelessWidget {
   }
 }
 
+class MyImageWidget extends StatefulWidget {
+  String uuid;
+  MyImageWidget(this.uuid);
+
+  @override
+  _MyImageWidgetState createState() => _MyImageWidgetState();
+}
+
+class _MyImageWidgetState extends State<MyImageWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+    );
+  }
+}
+
 
 
 ////
