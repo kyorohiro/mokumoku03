@@ -82,8 +82,16 @@ class MyHome extends StatelessWidget {
           if(snapshot.hasData) {
             return GridView.count(
               crossAxisCount: 3,
-              children: snapshot.data.map((e) => Container(child: Text('${e}'),)).toList(),
-            );       
+              children: snapshot.data.map((e) {
+                return  Container(
+                  //color: Colors.black38,
+                  decoration: BoxDecoration(
+                    borderRadius:BorderRadius.circular(10.0) ,
+                    border: Border.all(color:Colors.grey,width: 2)),
+                  child: Text('${e}'),
+                );
+              }).toList());
+                 
           }else {
 
           }
