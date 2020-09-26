@@ -36,7 +36,7 @@ class _DynamicGridViewState extends State<DynamicGridView> {
   Widget build(BuildContext context) {
     var controller = ScrollController();
     controller.addListener(() async {
-      print("called add listener");
+      //print("called add listener");
       if(controller.position.pixels == controller.position.maxScrollExtent) {
         // add item?        
         print("=====================");

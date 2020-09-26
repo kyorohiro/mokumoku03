@@ -53,12 +53,14 @@ void main() {
 
 // String := image url
 class MyDynamicGridViewClient extends  dyna.DynamicGridViewClient<String> {
-    int i=0;
+  int i=0;
+  Object lastKey;
   Future<List<String>> getData() async {
     //
     // TODO to implements about listFiles's lastkey  
-    var files = await listFiles();
-    return  files;
+    var result = await listFiles(lastKey:lastKey);
+    lastKey = result.lastkey;
+    return  result.data;
   }
   Widget createWidget(String v) {
     return Container(child: MyImageWidget(v),);

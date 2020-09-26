@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:firebase/firebase.dart' as fb;
+import 'package:firebase/firestore.dart';
 import 'package:uuid/uuid.dart';
 import './uuid.dart' as uuid;
 import 'dart:html' as html;
@@ -84,14 +85,36 @@ String createUUID() {
   return uuid.Uuid.createV1() +"_"+ uuid.Uuid.createUUID();
 }
 
-Future<List<String>> listFiles() async {
-   var collectionRef = fb.firestore().collection("users/${fb.auth().currentUser.uid}/files");
+class ListFilesResult {
+  List<String>  data;
+  Object lastkey;
+}
+
+//Future<List<String>> 
+Future<ListFilesResult> listFiles({Object lastKey}) async {
+   var collectionRef = fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").orderBy("name").limit(5);
+     print("lasyKey = ${lastKey}");
+     //  [memo]
+     //  ok : fb.firestore().collection("users/${fb.auth().currentUser.uid}/files").orderBy("name").limit(5); 
+     //  ng var x = fb.firestore().collection("users/${fb.auth().currentUser.uid}/files")
+     //        x.orderBy("name");
+   if(lastKey != null) {
+     collectionRef = collectionRef.startAfter(snapshot: lastKey );//(snapshot:lastKey as DocumentSnapshot);
+   }
+   // for debug
+   print("xx000");
+   //collectionRef = collectionRef.limit(25);
+   print("xx001");
    var x = await collectionRef.get();
+   print("xx002");
+
    for(var d in x.docs ){
      print(d.id);
    }
    print(x.size);
-   return x.docs.map((e) => e.id).toList();
+   return ListFilesResult()
+   ..data = x.docs.map((e) => e.id).toList()
+   ..lastkey = (x.docs.length > 0?x.docs.last:lastKey);
 }
 
 // path **/**/xx.png  is ok, /**/**.png is ng
@@ -145,7 +168,7 @@ Future<Uri> getUrl(String name) async  {
   var storageRef = fb.storage().ref("users/"+fb.auth().currentUser.uid);
   var testRef = storageRef.child("images/"+name);
   try {
-    print("getDownload");
+   // print("getDownload");
     var uri = await testRef.getDownloadURL();
 
     return  uri;
