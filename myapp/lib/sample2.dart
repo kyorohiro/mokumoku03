@@ -37,7 +37,7 @@ class DynamiCGridView extends StatefulWidget {
 }
 
 class _DynamiCGridViewState extends State<DynamiCGridView> {
-  List<String> contents = List.generate(30, (index) => "${index}").toList();
+  List contents = [];
   @override
   Widget build(BuildContext context) {
     var controller = ScrollController();
@@ -52,11 +52,24 @@ class _DynamiCGridViewState extends State<DynamiCGridView> {
         });
       }
     });
-    return GridView.count(
-      children: contents.map((e) => widget.client.createWidget(e)).toList(),
-      crossAxisCount: 3,
-      controller: controller,
-      );
-    //return Center(child: Text("Hello, World!!"),);
+    return FutureBuilder(
+      future: this.widget.client.getData(),
+      builder: (context, snapshot) {
+        print("-------- ${contents.length}");
+        if(snapshot.hasData) {
+          contents.addAll(snapshot.data);
+          return GridView.count(
+            children: contents.map((e) => widget.client.createWidget(e)).toList(),
+            crossAxisCount: 3,
+            controller: controller,
+            );
+        }else {
+          return Container(child: Text('...loading'),); 
+        }
+      },
+    );
+    
+    
+
   }
 }
