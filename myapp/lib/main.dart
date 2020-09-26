@@ -5,8 +5,6 @@ import './loginpage.dart';
 
 import './fileinput.dart' as fi;
 import './fileinput_web.dart' as fi;
-import 'package:firebase/firebase.dart' as fb;
-import 'dart:html' as html;
 
 /*
 [Memo]

@@ -141,22 +141,7 @@ Future<Uri> getUrl(String name) async  {
   try {
     print("getDownload");
     var uri = await testRef.getDownloadURL();
-    /*Future((){
-      print("ZZ-------- ${uri.toString()}");
-      var req = html.HttpRequest();
-      req.onLoad.listen((event) {
-        print("onLoad S");
-        var blob = req.response;
-        print("${blob}");        
-        print("onLoad E");
-      });
-      req.onError.listen((event) {
-        print("error");
-        print(event);
-      });
-      req.open("GET", uri.toString());
-      req.send();
-    });*/
+
     return  uri;
   } catch(e) {
     print("error");
@@ -164,6 +149,22 @@ Future<Uri> getUrl(String name) async  {
     rethrow;
   }
 }
+
+////
+////var req = html.HttpRequest();
+////req.onLoad.listen((event) {
+////  print("onLoad S");
+////  var blob = req.response;
+////  print("${blob}");        
+////  print("onLoad E");
+////});
+////req.onError.listen((event) {
+////  print("error");
+////  print(event);
+////});
+////req.open("GET", uri.toString());
+////req.send();
+////
 
 class LoginErrorMessage {
   String message;

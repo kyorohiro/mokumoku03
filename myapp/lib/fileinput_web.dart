@@ -1,5 +1,4 @@
 import 'dart:html' as html;
-import 'dart:typed_data';
 import './fileinput.dart';
 import 'dart:async';
 
