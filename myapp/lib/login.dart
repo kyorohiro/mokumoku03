@@ -86,6 +86,9 @@ String createUUID() {
 Future<List<String>> listFiles() async {
    var collectionRef = fb.firestore().collection("users/${fb.auth().currentUser.uid}/files");
    var x = await collectionRef.get();
+   for(var d in x.docs ){
+     print(d.id);
+   }
    print(x.size);
 }
 
