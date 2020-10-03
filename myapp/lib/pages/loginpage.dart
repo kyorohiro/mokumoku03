@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'api_client.dart';
+import '../services/api_client.dart';
 import 'dart:async';
-import './app_context.dart' as appContext;
+import '../app_context.dart' as appContext;
 var LABEL_LOGIN_PAGE = "Login Page";
 
 
@@ -22,16 +22,16 @@ moveToHome(){
     super.initState();
     print("initState");
     
-    print(logined());
-    subscription =  loginedStream().listen((event) {
+    print(appContext.apiClient.logined());
+    subscription =  appContext.apiClient.loginedStream().listen((event) {
       // life time?
       // move to another page? dead this state?
       print("=========== logined from stream");
       moveToHome();
-      print(logined());
+      print(appContext.apiClient.logined());
     });
 
-    if(logined()) {
+    if(appContext.apiClient.logined()) {
        moveToHome();
     }
   }
@@ -78,10 +78,10 @@ moveToHome(){
               var pass = passwordController.text;
               try {
                 print("click login");
-                if(logined()) {
+                if(appContext.apiClient.logined()) {
                   moveToHome();// todo wrong
                 } else {
-                  await login(email, pass);
+                  await appContext.apiClient.login(email, pass);
                 }
                 print("clicked login");
 
@@ -163,7 +163,7 @@ class LoginPage_ extends StatelessWidget {
               var email = emailController.text;
               var pass = passwordController.text;
               try {
-                await login(email, pass);
+                await appContext.apiClient.login(email, pass);
               } catch(e) {
                 if(e is LoginErrorMessage) {
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text("${e.message}")));

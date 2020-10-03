@@ -48,7 +48,7 @@ https://free-images.com/display/lighting_dept_high_st.html
 
 
 void main() {
-  setupClient();
+  appContext.apiClient.setupClient();
   runApp(
     MaterialApp(
       routes: <String, WidgetBuilder>{

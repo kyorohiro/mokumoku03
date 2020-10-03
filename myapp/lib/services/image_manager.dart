@@ -1,0 +1,8 @@
+class ImageManager {
+  
+
+}
+
+class ImageInfo {
+
+}
