@@ -32,6 +32,13 @@ service cloud.firestore {
 
 [ref]
 https://medium.com/@khreniak/cloud-firestore-security-rules-basics-fac6b6bea18e
+
+
+[TODO]
+ - Logout
+ - Upload then  display a image in image list page.
+ - click and display image.
+ - reize image for image list page 
 */
 
 
@@ -81,7 +88,18 @@ class MyHome extends StatelessWidget {
       body: Container(
           child: dyna.DynamicGridView(MyDynamicGridViewClient(),3),
       ),
-      appBar: AppBar(title: Text("Home"),),
+      appBar: AppBar(
+        title: Text("Home"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.logout), 
+            onPressed: (){
+              print("click logout");
+            })
+        ],
+
+        
+        ),
       //
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_a_photo),
