@@ -8,12 +8,15 @@ class ImageManager {
   DocumentSnapshot lastKey; 
 
   Future<List<String>> getImageUrls() async {
-    print(">call image urls 01");
+    print(">call image urls 01 ${items.length}");
     try {
+      print(">call image urls 02");
       var response = await appContext.apiClient.listFiles(lastKey: lastKey);
+      print(">call image urls 03");
+
       lastKey = response.lastkey;
       List<String> ret = [];
-      print("call image urls 02");
+      print("call image urls 04");
       response.data.forEach((element) {
         print("-el-> ${element}");
         if (putUuid(element)) {
@@ -25,7 +28,8 @@ class ImageManager {
       return ret;
     } catch (e) {
       print("xx ${e}");
-      rethrow;
+      //rethrow;
+      return [];
     }
   }
 

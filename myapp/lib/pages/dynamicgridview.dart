@@ -20,7 +20,6 @@ class SampleDynamicGridViewClient extends  DynamicGridViewClient<String> {
   }
 }
 
-//DynamicGridViewClient client = new  DynamicGridViewClient();
 
 class DynamicGridView extends StatefulWidget {
   final DynamicGridViewClient client;
@@ -51,15 +50,39 @@ class _DynamicGridViewState extends State<DynamicGridView> {
     // todo :this future build paet is wront
     return FutureBuilder(
       future: this.widget.client.getData(),
-      builder: (context, snapshot) {
-        
+      builder: (context, snapshot) {        
         if(snapshot.hasData) {
-          print("---ONEONE----- ${contents.length}");
           contents.addAll(snapshot.data);
-          return GridView.count(
+          var gridView =  GridView.count(
             children: contents.map((e) => widget.client.createWidget(e)).toList(),
             crossAxisCount: this.widget.crossAxisCount,
             controller: controller,
+            );
+
+            return Column(
+              children: [
+                Expanded(child:gridView),
+                /*
+                Container(
+                  height: 80,
+                  margin: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(0.0),
+                  color: Colors.white,
+                  child: RaisedButton(
+                    child: Container(                                        
+                      width: double.infinity,
+                      height: 80,
+                      alignment: Alignment.center,
+                      //color: Colors.white,
+                      decoration: BoxDecoration(                        
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        border: Border.all(width: 1.0),
+                        color: Colors.white
+                      ),
+                      child:  Text("More"),)
+                  ))
+                  */
+              ],
             );
         }else {
           return Container(child: Text('...loading'),); 
