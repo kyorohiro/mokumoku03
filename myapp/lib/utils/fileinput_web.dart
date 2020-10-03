@@ -1,5 +1,5 @@
 import 'dart:html' as html;
-import './fileinput.dart';
+import 'fileinput.dart';
 import 'dart:async';
 
 class FileInputDataWeb extends FileInputData {

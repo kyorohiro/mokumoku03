@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/reigstpage.dart' as page;
-import 'api_client.dart';
-import './loginpage.dart' as page;
-import './logoutpage.dart' as page;
-import './imagelistpage.dart' as page;
+import 'package:myapp/pages/reigstpage.dart' as page;
+import 'services/api_client.dart';
+import 'pages/loginpage.dart' as page;
+import 'pages/logoutpage.dart' as page;
+import 'pages/imagelistpage.dart' as page;
 
-import './fileinput.dart' as fi;
-import './fileinput_web.dart' as fi;
-import './dynamicgridview.dart' as dyna;
 import './app_context.dart' as appContext;
 /*
 [Memo]
