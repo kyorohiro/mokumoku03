@@ -40,8 +40,8 @@ https://free-images.com/display/lighting_dept_high_st.html
 
 [Today TODO]
  - (asis ok) Logout 
- - Upload then  display a image in image list page.
- - click and display image.
+ - (asis ok, todo refactoring)Upload then  display a image in image list page. 
+ - click and display expand image.
  - reize image for image list page 
  - image cached and think about outofmemory
 */

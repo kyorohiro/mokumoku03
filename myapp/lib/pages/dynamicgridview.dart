@@ -23,8 +23,8 @@ class SampleDynamicGridViewClient extends  DynamicGridViewClient<String> {
 //DynamicGridViewClient client = new  DynamicGridViewClient();
 
 class DynamicGridView extends StatefulWidget {
-  DynamicGridViewClient client;
-  int crossAxisCount;
+  final DynamicGridViewClient client;
+  final int crossAxisCount;
   DynamicGridView(this.client, this.crossAxisCount, {Key key}):super(key: key);
   @override
   _DynamicGridViewState createState() => _DynamicGridViewState();
