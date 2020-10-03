@@ -94,7 +94,7 @@ class _MyImageWidgetState extends State<MyImageWidget> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Uri d = snapshot.data;
-            var img = Image.network(d.toString());
+            var img = Image.network(d.toString(),fit: BoxFit.fill,);
             return Container(
               width: double.infinity,
 //              height: 200,
