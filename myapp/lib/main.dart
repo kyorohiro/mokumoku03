@@ -46,6 +46,7 @@ https://free-images.com/display/lighting_dept_high_st.html
  - Upload then  display a image in image list page.
  - click and display image.
  - reize image for image list page 
+ - image cached and think about outofmemory
 */
 
 

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/reigstpage.dart';
 import 'api_client.dart';
-import './loginpage.dart';
-import './logoutpage.dart';
 import './fileinput.dart' as fi;
 import './fileinput_web.dart' as fi;
 import './dynamicgridview.dart' as dyna;
@@ -67,7 +64,7 @@ class MyImageListPage extends StatelessWidget {
 }
 
 class MyImageWidget extends StatefulWidget {
-  String uuid;
+  final String uuid;
   MyImageWidget(this.uuid);
 
   @override
@@ -78,7 +75,6 @@ class _MyImageWidgetState extends State<MyImageWidget> {
   @override
   Widget build(BuildContext context) {
     getUrl(widget.uuid);
-    //return Container(child: Text("xx"),);
     
     return FutureBuilder(
       future: getUrl(widget.uuid),
