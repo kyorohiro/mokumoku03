@@ -15,9 +15,14 @@ typedef OnSignedIn = void Function();
 typedef OnNoSignedIn = void Function();
 
 
-StreamController<Null> _logined = StreamController<Null>.broadcast();
-Stream<Null> logined(){
-  return _logined.stream;
+StreamController<Null> _loginedStream = StreamController<Null>.broadcast();
+Stream<Null> loginedStream(){
+  return _loginedStream.stream;
+}
+
+bool logined() {
+  // todo 
+  return fb.auth().currentUser != null;
 }
 
 //
@@ -38,7 +43,7 @@ setupClient({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
       print("user:${user}");
       if(user != null) {
         if(onSignedIn != null){onSignedIn();}
-        _logined.add(null);
+        _loginedStream.add(null);
       }else {
         if(onNoSignedIn != null){onNoSignedIn();}
       }

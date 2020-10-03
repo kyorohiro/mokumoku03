@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './login.dart';
+import 'api_client.dart';
 import 'dart:async';
 
 var LABEL_LOGIN_PAGE = "Login Page";
@@ -14,16 +14,26 @@ class _LoginPageState extends State<LoginPage> {
 
  StreamSubscription<Null> subscription;
 
+moveToHome(){
+  Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+}
  @override
   void initState() {
     super.initState();
     print("initState");
-    subscription =  logined().listen((event) {
+    
+    print(logined());
+    subscription =  loginedStream().listen((event) {
       // life time?
       // move to another page? dead this state?
-      print("logined");
-      Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+      print("=========== logined from stream");
+      moveToHome();
+      print(logined());
     });
+
+    if(logined()) {
+       moveToHome();
+    }
   }
 
   @override
@@ -67,7 +77,14 @@ class _LoginPageState extends State<LoginPage> {
               var email = emailController.text;
               var pass = passwordController.text;
               try {
-                await loginAtFirebase(email, pass);
+                print("click login");
+                if(logined()) {
+                  moveToHome();// todo wrong
+                } else {
+                  await login(email, pass);
+                }
+                print("clicked login");
+
               } catch(e) {
                 if(e is LoginErrorMessage) {
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text("${e.message}")));
@@ -146,7 +163,7 @@ class LoginPage_ extends StatelessWidget {
               var email = emailController.text;
               var pass = passwordController.text;
               try {
-                await loginAtFirebase(email, pass);
+                await login(email, pass);
               } catch(e) {
                 if(e is LoginErrorMessage) {
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text("${e.message}")));

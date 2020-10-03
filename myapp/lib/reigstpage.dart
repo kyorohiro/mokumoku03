@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './login.dart';
+import 'api_client.dart';
 
 var LABEL_REGIST_PAGE = "Regist Page";
 var LABEL_REGIST_BUTTON = "Regist";

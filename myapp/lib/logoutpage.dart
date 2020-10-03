@@ -38,11 +38,12 @@ class _LogoutPageState extends State<LogoutPage> {
           RaisedButton(
             child: Text("Logout"),
             onPressed: () async {
-              print("on pressed");
               try {
                 // todo logout
                 //await loginAtFirebase(email, pass);
+                print("click ologout");
                 await logout();
+                Navigator.pop(context);//??
               } catch(e) {
                 if(e is LoginErrorMessage) {
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text("${e.message}")));
