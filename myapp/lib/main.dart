@@ -34,8 +34,8 @@ service cloud.firestore {
 https://medium.com/@khreniak/cloud-firestore-security-rules-basics-fac6b6bea18e
 
 
-[TODO]
- - Logout
+[Today TODO]
+ - (asis ok) Logout 
  - Upload then  display a image in image list page.
  - click and display image.
  - reize image for image list page 
