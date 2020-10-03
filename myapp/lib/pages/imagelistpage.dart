@@ -31,11 +31,15 @@ class MyDynamicGridViewClient extends  dyna.DynamicGridViewClient<String> {
 }
 
 class MyImageListPage extends StatelessWidget {
+  GlobalKey imagesWidgetGlobalKey = GlobalKey();
+  MyImageListPage() {
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          child: dyna.DynamicGridView(MyDynamicGridViewClient(),3),
+          child: dyna.DynamicGridView(MyDynamicGridViewClient(),3, key:imagesWidgetGlobalKey),
       ),
       appBar: AppBar(
         title: Text("Home"),
@@ -59,7 +63,9 @@ class MyImageListPage extends StatelessWidget {
           if(filedata != null && filedata.length > 0) {
             var binary = await filedata.first.getBinaryData();
             var uuid = await appContext.apiClient.uploadBuffer(binary);
-            appContext.imgManager.putUuid(uuid);
+            //appContext.imgManager.putUuid(uuid);
+            imagesWidgetGlobalKey.currentState.setState(() {              
+            });
           }
         }),    
       );
