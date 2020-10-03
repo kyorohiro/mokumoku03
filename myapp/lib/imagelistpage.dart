@@ -6,7 +6,7 @@ import './logoutpage.dart';
 import './fileinput.dart' as fi;
 import './fileinput_web.dart' as fi;
 import './dynamicgridview.dart' as dyna;
-
+import './app_context.dart' as appContext;
 
 // String := image url
 class MyDynamicGridViewClient extends  dyna.DynamicGridViewClient<String> {
@@ -45,7 +45,7 @@ class MyImageListPage extends StatelessWidget {
             icon: Icon(Icons.logout), 
             onPressed: (){
               print("click logout");
-              Navigator.pushNamed(context, "/logout");
+              Navigator.pushNamed(context, appContext.routeLogoutPagePath);
             })
         ],
 

@@ -56,7 +56,7 @@ void main() {
         "/login": (context) => page.LoginPage(),
         "/regist":(context) => page.RegistPage(),
         "/home": (context) => page.MyImageListPage(),
-        "/logout": (context) => page.LogoutPage()
+        "/logout": (context) => page.LogoutPage(),
       },
       initialRoute: "/login",
     )

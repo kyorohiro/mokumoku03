@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'api_client.dart';
 import 'dart:async';
-
+import './app_context.dart' as appContext;
 var LABEL_LOGOUT_PAGE = "Logout Page";
 
 
@@ -43,7 +43,7 @@ class _LogoutPageState extends State<LogoutPage> {
                 //await loginAtFirebase(email, pass);
                 print("click ologout");
                 await logout();
-                Navigator.popAndPushNamed(context, "/login");//??
+                Navigator.popAndPushNamed(context, appContext.routeLoginPagePath);//??
               } catch(e) {
                 if(e is LoginErrorMessage) {
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text("${e.message}")));

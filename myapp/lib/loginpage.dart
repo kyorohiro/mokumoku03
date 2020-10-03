@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'api_client.dart';
 import 'dart:async';
-
+import './app_context.dart' as appContext;
 var LABEL_LOGIN_PAGE = "Login Page";
 
 
@@ -103,7 +103,7 @@ moveToHome(){
                     ),
                   onTap: (){
                     print("regist page btn");
-                    Navigator.pushNamed(context, "/regist");
+                    Navigator.pushNamed(context, appContext.routeRegistPagePath);
                   },
                 )
             )
@@ -182,7 +182,7 @@ class LoginPage_ extends StatelessWidget {
                     ),
                   onTap: (){
                     print("regist page btn");
-                    Navigator.pushNamed(context, "/regist");
+                    Navigator.pushNamed(context, appContext.routeRegistPagePath);
                   },
                 )
             )
