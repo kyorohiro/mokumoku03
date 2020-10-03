@@ -52,12 +52,28 @@ void main() {
   appContext.apiClient.setupClient();
   runApp(
     MaterialApp(
+      onGenerateRoute: (RouteSettings settings) {
+        var _uri = Uri.parse(settings.name);
+        String path = _uri.path;
+        Map<String,String> params = _uri.queryParameters;
+        print("path: ${path}");
+        print("params: ${params}");
+        if(path.startsWith("/image")) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return ImagePage(params["uuid"]);
+            },
+          );
+        } else {
+          return null;
+        }
+      },
       routes: <String, WidgetBuilder>{
         appContext.routeLoginPagePath : (context) => page.LoginPage(),
         appContext.routeRegistPagePath:(context) => page.RegistPage(),
         appContext.routeHomePagePath: (context) => page.MyImageListPage(),
         appContext.routeLogoutPagePath: (context) => page.LogoutPage(),
-        appContext.routeImage: (context) => ImagePage()
+        //appContext.routeImage: (context) => ImagePage()
       },
       initialRoute: "/login",
     )
@@ -65,12 +81,15 @@ void main() {
 }
 
 class ImagePage extends StatelessWidget {
+  final String uuid;
+  ImagePage(this.uuid) {
+  }
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context).settings.arguments;
+    //var args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(title: Text("IMG"),),
-      body: MyImageWidget((args as Map)["name"]),
+      body: MyImageWidget(uuid),
     );
   }
 }

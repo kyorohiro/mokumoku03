@@ -30,7 +30,7 @@ class MyDynamicGridViewClient extends dyna.DynamicGridViewClient<String> {
     return GestureDetector(
       onTap: () {
         print("tap image");
-        Navigator.pushNamed(context, appContext.routeImage, arguments: {"name":uuidForImage});
+        Navigator.pushNamed(context, appContext.routeImage+"?uuid=${uuidForImage}");//, arguments: {"name":uuidForImage});
       },
       child: body,
     );
