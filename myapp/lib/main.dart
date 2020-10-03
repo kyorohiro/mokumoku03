@@ -8,6 +8,7 @@ import './imagelistpage.dart' as page;
 import './fileinput.dart' as fi;
 import './fileinput_web.dart' as fi;
 import './dynamicgridview.dart' as dyna;
+import './app_context.dart' as appContext;
 /*
 [Memo]
 # Firebase Storage Rule
@@ -53,10 +54,10 @@ void main() {
   runApp(
     MaterialApp(
       routes: <String, WidgetBuilder>{
-        "/login": (context) => page.LoginPage(),
-        "/regist":(context) => page.RegistPage(),
-        "/home": (context) => page.MyImageListPage(),
-        "/logout": (context) => page.LogoutPage(),
+        appContext.routeLoginPagePath : (context) => page.LoginPage(),
+        appContext.routeRegistPagePath:(context) => page.RegistPage(),
+        appContext.routeHomePagePath: (context) => page.MyImageListPage(),
+        appContext.routeLogoutPagePath: (context) => page.LogoutPage(),
       },
       initialRoute: "/login",
     )
