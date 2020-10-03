@@ -16,9 +16,7 @@ class ImageManager {
       print("call image urls 02");
       response.data.forEach((element) {
         print("-el-> ${element}");
-        if (!itemsAtMap.containsKey(element)) {
-          itemsAtMap[element] = true;
-          items.add(element);
+        if (putUuid(element)) {
           ret.add(element);
         }
       });
@@ -28,6 +26,16 @@ class ImageManager {
     } catch (e) {
       print("xx ${e}");
       rethrow;
+    }
+  }
+
+  putUuid(String uuid) {
+    if(!itemsAtMap.containsKey(uuid)){
+        itemsAtMap[uuid] = true;
+        items.add(uuid);
+        return true;
+    } else {
+      return false;
     }
   }
 }

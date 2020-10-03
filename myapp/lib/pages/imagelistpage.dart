@@ -58,7 +58,8 @@ class MyImageListPage extends StatelessWidget {
           var filedata = await fi.FileInputBuilderWeb().create().getFiles();
           if(filedata != null && filedata.length > 0) {
             var binary = await filedata.first.getBinaryData();
-            appContext.apiClient.uploadBuffer(binary);
+            var uuid = await appContext.apiClient.uploadBuffer(binary);
+            appContext.imgManager.putUuid(uuid);
           }
         }),    
       );
