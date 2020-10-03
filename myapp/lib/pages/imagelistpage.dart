@@ -12,11 +12,13 @@ class MyDynamicGridViewClient extends  dyna.DynamicGridViewClient<String> {
   Future<List<String>> getData() async {
     //
     // TODO to reimplements about listFiles's lastkey  
-    var result = await appContext.apiClient.listFiles(lastKey:lastKey);
-    lastKey = result.lastkey;
-    return  result.data;
+    //var result = await appContext.apiClient.listFiles(lastKey:lastKey);
+    //lastKey = result.lastkey;
+    //return  result.data;
+    return appContext.imgManager.getImageUrls();
   }
   Widget createWidget(String v) {
+    //String url = appContext.apiClient.getUrl(v);
     return  Container(
             //color: Colors.black38,
             decoration: BoxDecoration(

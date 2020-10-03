@@ -120,7 +120,7 @@ class ApiClient {
     for (var d in x.docs) {
       print(d.id);
     }
-    print(x.size);
+    print("e ${x.size}");
     return ListFilesResult()
       ..data = x.docs.map((e) => e.id).toList()
       ..lastkey = (x.docs.length > 0 ? x.docs.last : lastKey);
