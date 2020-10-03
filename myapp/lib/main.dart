@@ -67,11 +67,41 @@ class ImagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments;
-    return Container(
-      child: Text((args as Map)["name"]),
+    return Scaffold(
+      body: MyImageWidget((args as Map)["name"]),
     );
   }
 }
+
+
+class MyImageWidget extends StatefulWidget {
+  final String uuid;
+  MyImageWidget(this.uuid);
+
+  @override
+  _MyImageWidgetState createState() => _MyImageWidgetState();
+}
+
+class _MyImageWidgetState extends State<MyImageWidget> {
+  @override
+  Widget build(BuildContext context) {
+    appContext.apiClient.getUrl(widget.uuid);
+
+    return FutureBuilder(
+        future: appContext.apiClient.getUrl(widget.uuid),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Uri d = snapshot.data;
+            return Image.network(d.toString());
+          } else {
+            return Container(
+              child: Text("Loading.."),
+            );
+          }
+        });
+  }
+}
+
 
 ////
 ////<!-- The core Firebase JS SDK is always required and must be listed first -->
