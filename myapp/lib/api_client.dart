@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart';
 import 'package:uuid/uuid.dart';
-import './uuid.dart' as uuid;
+import 'uuid.dart' as uuid;
 import 'dart:html' as html;
 
 fb.App gfirebaseApp;
@@ -23,7 +23,7 @@ Stream<Null> logined(){
 //
 // Firebase
 //
-setupFirebase({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
+setupClient({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
   try {
     print("fb init");
     gfirebaseApp = fb.initializeApp(
@@ -50,7 +50,7 @@ setupFirebase({OnSignedIn onSignedIn, OnNoSignedIn onNoSignedIn}) {
   }
 }
 
-loginAtFirebase(String email, String password) async {
+login(String email, String password) async {
   try {
     print("fn slog");
     var userCredential = await fb.auth().signInWithEmailAndPassword(email, password);
@@ -62,6 +62,10 @@ loginAtFirebase(String email, String password) async {
   } finally {
      print("fn elog");
   }
+}
+
+logout() {
+  fb.auth().signOut();
 }
 
 registAtFirebase(String email, String password) async {
