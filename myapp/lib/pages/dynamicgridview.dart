@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 //
 abstract class DynamicGridViewClient<X> {
   Future<List<X>> getData();
-  Widget createWidget(X v);
+  Widget createWidget(BuildContext context, X v);
 }
 
 class SampleDynamicGridViewClient extends  DynamicGridViewClient<String> {
@@ -15,7 +15,7 @@ class SampleDynamicGridViewClient extends  DynamicGridViewClient<String> {
   Future<List<String>> getData() async {
     return List<String>.generate(100, (index) => "ZZ:${i++}");
   }
-  Widget createWidget(String v) {
+  Widget createWidget(BuildContext context, String v) {
     return Container(child: Text(v),);
   }
 }
@@ -54,7 +54,7 @@ class _DynamicGridViewState extends State<DynamicGridView> {
         if(snapshot.hasData) {
           contents.addAll(snapshot.data);
           var gridView =  GridView.count(
-            children: contents.map((e) => widget.client.createWidget(e)).toList(),
+            children: contents.map((e) => widget.client.createWidget(context, e)).toList(),
             crossAxisCount: this.widget.crossAxisCount,
             controller: controller,
             );

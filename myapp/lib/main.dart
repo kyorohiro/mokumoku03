@@ -56,13 +56,22 @@ void main() {
         appContext.routeRegistPagePath:(context) => page.RegistPage(),
         appContext.routeHomePagePath: (context) => page.MyImageListPage(),
         appContext.routeLogoutPagePath: (context) => page.LogoutPage(),
+        appContext.routeImage: (context) => ImagePage()
       },
       initialRoute: "/login",
     )
   );
 }
 
-
+class ImagePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var args = ModalRoute.of(context).settings.arguments;
+    return Container(
+      child: Text((args as Map)["name"]),
+    );
+  }
+}
 
 ////
 ////<!-- The core Firebase JS SDK is always required and must be listed first -->

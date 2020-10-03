@@ -18,7 +18,7 @@ class MyDynamicGridViewClient extends dyna.DynamicGridViewClient<String> {
     return appContext.imgManager.getImageUrls();
   }
 
-  Widget createWidget(String uuidForImage) {
+  Widget createWidget(BuildContext context,String uuidForImage) {
     var body = Container(
         //color: Colors.black38,
         decoration: BoxDecoration(
@@ -30,6 +30,7 @@ class MyDynamicGridViewClient extends dyna.DynamicGridViewClient<String> {
     return GestureDetector(
       onTap: () {
         print("tap image");
+        Navigator.pushNamed(context, appContext.routeImage, arguments: {"name":uuidForImage});
       },
       child: body,
     );
