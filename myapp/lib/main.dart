@@ -6,6 +6,7 @@ import 'pages/logoutpage.dart' as page;
 import 'pages/imagelistpage.dart' as page;
 
 import './app_context.dart' as appContext;
+import 'dart:html' as html; // todo
 /*
 [Memo]
 # Firebase Storage Rule
@@ -58,7 +59,9 @@ void main() {
         Map<String,String> params = _uri.queryParameters;
         print("path: ${path}");
         print("params: ${params}");
+
         if(path.startsWith("/image")) {
+          //html.window.location.replace("/#/image?uuid=${params['uuid']}");
           return MaterialPageRoute(
             builder: (context) {
               return ImagePage(params["uuid"]);
