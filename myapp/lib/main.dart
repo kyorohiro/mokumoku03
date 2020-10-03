@@ -41,7 +41,8 @@ https://free-images.com/display/lighting_dept_high_st.html
 [Today TODO]
  - (asis ok) Logout 
  - (asis ok, todo refactoring)Upload then  display a image in image list page. 
- - click and display expand image.
+ - (asis ok) click and move to image page
+-  expand image at image page.
  - reize image for image list page 
  - image cached and think about outofmemory
 */
@@ -68,6 +69,7 @@ class ImagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+      appBar: AppBar(title: Text("IMG"),),
       body: MyImageWidget((args as Map)["name"]),
     );
   }
@@ -92,7 +94,13 @@ class _MyImageWidgetState extends State<MyImageWidget> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Uri d = snapshot.data;
-            return Image.network(d.toString());
+            var img = Image.network(d.toString());
+            return Container(
+              width: double.infinity,
+//              height: 200,
+              child: img,
+            );
+            //return Image.network(d.toString());
           } else {
             return Container(
               child: Text("Loading.."),
