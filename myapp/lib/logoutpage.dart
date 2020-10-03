@@ -43,7 +43,7 @@ class _LogoutPageState extends State<LogoutPage> {
                 //await loginAtFirebase(email, pass);
                 print("click ologout");
                 await logout();
-                Navigator.pop(context);//??
+                Navigator.popAndPushNamed(context, "/login");//??
               } catch(e) {
                 if(e is LoginErrorMessage) {
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text("${e.message}")));

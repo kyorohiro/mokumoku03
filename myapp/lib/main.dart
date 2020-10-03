@@ -52,9 +52,7 @@ void main() {
         "/home": (context) => MyHome(),
         "/logout": (context) => LogoutPage()
       },
-      home: LoginPage(),
- 
-
+      initialRoute: "/login",
     )
   );
 }
