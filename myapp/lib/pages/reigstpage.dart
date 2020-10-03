@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/api_client.dart';
 import '../app_context.dart' as appContext;
 
+
 var LABEL_REGIST_PAGE = "Regist Page";
 var LABEL_REGIST_BUTTON = "Regist";
 
