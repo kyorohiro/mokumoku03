@@ -1,6 +1,9 @@
 Image Uploader with Firebase
 
 
+https://dev.to/kyorohiro/dart-x-flutter-mokumoku-live-coding-26-09-2020-1icb
+
+https://dev.to/kyorohiro/dart-x-flutter-mokumoku-live-coding-04-10-2020-dlk
 
 
 [Page]
