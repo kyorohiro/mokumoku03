@@ -43,8 +43,7 @@ https://free-images.com/display/lighting_dept_high_st.html
  - (asis ok) Logout 
  - (asis ok, todo refactoring)Upload then  display a image in image list page. 
  - (asis ok) click and move to image page
- - (todo) /#/image?uuid=${params['uuid']} is force chage into /#/home 
--  expand image at image page.
+ - expand image at image page.
  - reize image for image list page 
  - image cached and think about outofmemory
 */
