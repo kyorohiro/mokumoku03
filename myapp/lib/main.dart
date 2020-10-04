@@ -60,10 +60,12 @@ void main() {
         Map<String,String> params = _uri.queryParameters;
         print("path: ${path}");
         print("params: ${params}");
-
         if(path.startsWith("/image")) {
           //html.window.location.replace("/#/image?uuid=${params['uuid']}");
           return MaterialPageRoute(
+            settings: RouteSettings(
+              name:"/image?uuid=${params['uuid']}"
+            ),
             builder: (context) {
               return ImagePage(params["uuid"]);
             },
@@ -111,7 +113,8 @@ class _MyImageWidgetState extends State<MyImageWidget> {
   @override
   Widget build(BuildContext context) {
     appContext.apiClient.getUrl(widget.uuid);
-
+    //
+    // login
     return FutureBuilder(
         future: appContext.apiClient.getUrl(widget.uuid),
         builder: (context, snapshot) {

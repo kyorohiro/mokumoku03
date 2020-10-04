@@ -173,18 +173,22 @@ class ApiClient {
 //
 // todo s/images/files/g
 //
-  Future<Uri> getUrl(String name) async {
-    var storageRef = fb.storage().ref("users/" + fb.auth().currentUser.uid);
-    var testRef = storageRef.child("images/" + name);
-    try {
-      // print("getDownload");
-      var uri = await testRef.getDownloadURL();
+  Future<Uri> getUrl(String name, {waittingForLogined=true}) async {
+    for(int i=0;i<3;i++) {
+      try {
+          var storageRef = fb.storage().ref("users/" + fb.auth().currentUser.uid);
+          var testRef = storageRef.child("images/" + name);
 
-      return uri;
-    } catch (e) {
-      print("error");
-      print("${e}");
-      rethrow;
+          var uri = await testRef.getDownloadURL();
+          return uri;
+      } catch (e) {
+        print("error");
+        await Future.delayed(Duration(seconds: 1));
+        if(i>2){
+        print("${e}");
+          rethrow;
+        }
+      }
     }
   }
 }
